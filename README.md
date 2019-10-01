@@ -1,1 +1,1 @@
-# Lecture-Notes
+# Lecture Notes
