@@ -15,8 +15,7 @@
 #Asignación: empaquete las funciones de este archivo en un módulo independiente.
 
 def crear_contacto(agenda_path):
-    """Esta función agrega un contacto a una agenda, ambos pasados como
-    argumentos"""
+    """Esta función agrega un contacto a una agenda"""
     nombre = input("Ingrese el nombre del contacto: ")
     telefono = input("Ingrese el telefono de {} :".format(nombre))
     direccion = input("Ingrese la dirección de {} :".format(nombre))
@@ -35,16 +34,15 @@ def crear_contacto(agenda_path):
     cargar_agenda(agenda_path,agenda)
 
 def eliminar_contacto(agenda_path):
-    """Esta función elimina un contacto de una agenda, ambos pasados como
-    argumentos"""
+    """Esta función elimina un contacto de una agenda"""
     # Asinación : Hacer que los identificadores id se reacomoden cuando se elimine un contacto.
     Flag = True
     while Flag:
-        nombre = input("Indique nombre (o parte del nombre) del contanto que desea eliminar de la agenda: ")
+        nombre = input("Indique nombre (o parte del nombre) del contacto que desea eliminar de la agenda: ")
         agenda = descargar_agenda(agenda_path)
-        print("Identifique el ID del usuario que desea eliminar.")
+        print("Identifique el id del usuario que desea eliminar.")
         for element_key,element in buscar(agenda, nombre.lower()):
-            print('ID: {}\t nombre: {}'.format(element_key, element))
+            print('id: {}\t nombre: {}'.format(element_key, element))
 
         id = input("Ingrese el id del contacto a eliminar de la agenda: ")
         
@@ -63,9 +61,9 @@ def eliminar_contacto(agenda_path):
 
 
 def cargar_agenda(agenda_path, agenda):
-    """La función cargar_agenda busca (o crea) el archivo de texto donde se
-    encuentra almacenado una agenda dada y sustituye (o escribe) su contenido. Se pasa
-    como argumento la ruta donde está la agenda y la variable asociado al
+    """La función cargar_agenda crea el archivo de texto donde se
+    almacenará una agenda dada y escribe o sustituye su contenido. Se pasa
+    como argumento la ruta donde está la agenda y la variable asociada al
     contacto a modificar."""
 
     with open(agenda_path+'.txt', 'wt') as file:
@@ -83,9 +81,9 @@ def cargar_agenda(agenda_path, agenda):
 
 
 def descargar_agenda(agenda_path):
-    """La función cargar_agenda busca (o crea) el archivo de texto donde se
-    encuentra almacenado una agenda dada y sustituye (o escribe) su contenido. Se pasa
-    como argumento la ruta donde está la agenda y la variable asociado al
+    """La función descargar_agenda busca el archivo de texto donde se
+    encuentra almacenada una agenda dada y descarga su contenido. Se pasa
+    como argumento la ruta donde está la agenda y la variable asociada al
     contacto a modificar."""
     agenda = {}
     with open(agenda_path+'.txt', 'r') as file:
@@ -116,8 +114,7 @@ def buscar(agenda, nombre):
 def main():
     """La función main es la instancia principal del programa, utiliza el tipo
     de dato dict para representar la agenda telefónica, así como para
-    representar los contactos. A continuación se muestran ejemplos de lo
-    anterior:
+    representar los contactos. Ejemplo:
 
         contacto1 = {'Nombre':'Carlos C. González E.', 'Telefono': '+58 0412 223
         1222', 'Direccion': 'Colinas de Bellomonte.'}
@@ -128,8 +125,11 @@ def main():
         agenda = {'0-0001': contacto1, '0-0002': contacto2}"""
     # Asignación: agregar una opcion para mostrar un resumen del calendario en la consola,
     # este resumen debe estar formateado para facilitar su lectura.
+    with open("agenda.txt", "w"):
+        pass
+    
     while(True):
-        accion = input("Quiere crear o eliminar un contacto? (Escibra 'crear' o 'eliminar'): ")
+        accion = input("Quiere crear o eliminar un contacto? (Escriba 'crear' o 'eliminar'): ")
 
         if accion.lower() == 'crear':
             crear_contacto('agenda')
