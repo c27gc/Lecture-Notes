@@ -1,0 +1,1 @@
+Estamos agregando otra línea?Con el modo "a", que hace referencia a la palabra append Es posible escribir múltiples veces en el archivo, sin sobreescribir las anteriores
