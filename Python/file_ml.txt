@@ -1,4 +1,0 @@
-Hola.
-Bienvenido al curso de Python.
-Esperamos que sea una agradable experiencia.Lo lograste.
-Has creado un archivo de forma segura.
