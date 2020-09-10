@@ -88,22 +88,41 @@ def descargar_agenda(agenda_path):
     agenda = {}
     with open(agenda_path+'.txt', 'r') as file:
         content = file.read().split('\n')
-        for i in range(0,len(content),4):
-            id = content[i].split(':')[1]
-            nombre = content[i + 1].split(':')[1]
-            telefono = content[i + 2].split(':')[1]
-            direccion = content[i + 3].split(':')[1]
-            contacto = {'Nombre': nombre, 'Telefono': telefono, 'Direccion': direccion}
-            agenda.update( {id: contacto} )
+        if content != ['']:
+            for i in range(0,len(content),4):
+                id = content[i].split(':')[1]
+                nombre = content[i + 1].split(':')[1]
+                telefono = content[i + 2].split(':')[1]
+                direccion = content[i + 3].split(':')[1]
+                contacto = {'Nombre': nombre, 'Telefono': telefono, 'Direccion': direccion}
+                agenda.update( {id: contacto} )
 
     return agenda
 
+def crear_si_no_existe(agenda_path):
+    """La funcion crear_si_no_existe funcion crea de forma segura el archivo agenda.txt. La
+    implementacion se realiza sin importar ningun modulo de python, además, se
+    al final del subprograma en comentarios se adjunto una implementacion
+    importando el modulo os."""
+
+    try:
+        with open('agenda.txt', 'r') as file:
+            pass
+    except FileNotFoundError:
+        with open('agenda.txt', 'w'):
+            pass
+    # import os.path
+    # file_exists = os.path.isfile(agenda_path)
+    # if file_exists:
+    #   pass
+    # else:
+    #   with open('agenda.txt', 'w'):
+    #       pass
 
 
 def buscar(agenda, nombre):
     lista_id = []
     lista_nombre = []
-    print(agenda.keys())
     for id in agenda.keys():
         if nombre.lower() in agenda[id]['Nombre'].lower():
             lista_id.append(id)
@@ -125,20 +144,22 @@ def main():
         agenda = {'0-0001': contacto1, '0-0002': contacto2}"""
     # Asignación: agregar una opcion para mostrar un resumen del calendario en la consola,
     # este resumen debe estar formateado para facilitar su lectura.
-    with open("agenda.txt", "w"):
-        pass
+    crear_si_no_existe('agenda.txt')
     
     while(True):
-        accion = input("Quiere crear o eliminar un contacto? (Escriba 'crear' o 'eliminar'): ")
+        accion = input("Quiere crear, eliminar un contacto o salir del programa? (Escriba 'crear' o 'eliminar', 'salir'): ")
 
         if accion.lower() == 'crear':
             crear_contacto('agenda')
         elif accion.lower() == 'eliminar':
             eliminar_contacto('agenda')
+        elif accion.lower() == 'salir':
+            break
         else:
             raise ValueError("Error, opción no válida. Las opciones válidas son crear y editar.")
 
-        
+    print("Fin del programa, gracias por utilizar la agenda")
+
 if __name__ == '__main__':
     main()
 
